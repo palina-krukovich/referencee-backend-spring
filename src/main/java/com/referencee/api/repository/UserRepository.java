@@ -1,10 +1,12 @@
 package com.referencee.api.repository;
 
-import com.referencee.api.entity.User;
-import org.springframework.data.repository.CrudRepository;
+import com.referencee.api.model.User;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.stereotype.Repository;
+import java.util.List;
 
-public interface UserRepository extends CrudRepository<User, String> {
-    void createUser(String userEmail);
-    void createAdmin(String userEmail);
-    Boolean isAdmin(String userEmail);
+@Repository
+public interface UserRepository extends PagingAndSortingRepository<User, Integer> {
+    User findOneByEmail(String email);
+    List<User> findAllByAdminTrue();
 }
